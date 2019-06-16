@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Button, Modal, ModalHeader, Col,Label,Input,FormGroup } from 'reactstrap';
 import {connect} from 'react-redux';
 import {addItem} from '../actions/itemActions'; 
+
 class ItemModal extends React.Component {
 
     state = {
