@@ -28,6 +28,7 @@ class AppNavbar extends Component{
     state = {
         isOpen:false
     }
+     
 
     toggle = () =>{
         this.setState({isOpen:!this.isOpen});
@@ -36,6 +37,12 @@ class AppNavbar extends Component{
 
 
     render(){
+        const hmbIconStyle = {
+            width: "15px",
+            height: "2px",
+            background: "white",
+            margin: "2px 0"
+        };
         const {isAuthenticated,user} = this.props.auth;
         const authLinks =(
             <Fragment>
@@ -66,9 +73,9 @@ class AppNavbar extends Component{
             <Navbar color="dark"   expand="sm" className="mn-5" >
                 <Container>
                     <NavbarBrand href="/">Shopping List </NavbarBrand>
-                    <NavbarToggler onClick={this.toggle} > </NavbarToggler>
-                    <Collapse isOpen={this.state.isOpen} navbar> 
-                        <Nav className="ml-auto" navbar >
+                    <NavbarToggler className='navbar-light' onClick={this.toggle} > <div style={hmbIconStyle}/> <div style={hmbIconStyle}/> <div style={hmbIconStyle}/>  </NavbarToggler>
+                    <Collapse className='navbar navbar-light' isOpen={this.state.isOpen} navbar> 
+                        <Nav  className="ml-auto" navbar >
                             {isAuthenticated? authLinks : guestLinks}
                         </Nav>
                      </Collapse>
