@@ -2,8 +2,13 @@ import React from 'react';
 import { Form, Button, Modal, ModalHeader, Col,Label,Input,FormGroup } from 'reactstrap';
 import {connect} from 'react-redux';
 import {addItem} from '../actions/itemActions'; 
+import PropTypes from 'prop-types';
 
 class ItemModal extends React.Component {
+
+    static propTypes ={
+      isAuthenticated: PropTypes.bool.isRequired
+    }
 
     state = {
         modal: false,
@@ -33,10 +38,11 @@ class ItemModal extends React.Component {
      render() {
         return (
           <div>
-            <Button 
+            {this.props.isAuthenticated ? (<Button 
               style={{margin:'1rem 0'}}  
               color="dark" onClick={this.toggle}
-              >Add Item</Button>
+              >Add Item</Button>) : <h4 className='mb-3 ml-4'>Please login to add shopping list item</h4>}
+            
             <Modal isOpen={this.state.modal} toggle={this.toggle} className= {this.props.className}>
               <ModalHeader toggle={this.toggle}>Add Item</ModalHeader>
               <Form onSubmit={this.onSubmit}>
@@ -63,6 +69,7 @@ class ItemModal extends React.Component {
 }
 
 const mapStateToProps = state=> ({
-    item: state.item
+    item: state.item,
+    isAuthenticated:state.auth.isAuthenticated
 });
 export default connect(mapStateToProps,{addItem})(ItemModal);
